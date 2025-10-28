@@ -19,7 +19,7 @@ def pokemon(request, id: int):
 def trainer_list(request):
     trainers = Trainer.objects.all()
     template = loader.get_template('trainer_list.html')
-    return HttpResponse(template.render({'trainers': trainer}, request))
+    return HttpResponse(template.render({'trainers': trainers}, request))
 
 def trainer (request, trainer_id):
     trainer = Trainer.objects.get(id=trainer_id)

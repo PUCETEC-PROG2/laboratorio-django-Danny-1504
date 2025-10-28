@@ -2,7 +2,7 @@
 {% block content %}
   <p class="p-2">Hola, este es mi primer Pokedex en Django</p>
     <h3>Pokemons</h3>
-    <a href="{%url 'trainers'%}"><h3>Entrenadores</h3></a>
+    <a href="{% url 'trainers' %}"><h3>Entrenadores</h3></a>
       <div class='row'>  
        {% for pokemon in pokemons %}       
       
