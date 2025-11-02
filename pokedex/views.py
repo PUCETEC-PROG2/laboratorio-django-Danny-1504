@@ -5,8 +5,9 @@ from .models import Trainer
 
 def index(request):
     pokemons = Pokemon.objects.all()
+    trainer=Trainer.objects.all()
     template = loader.get_template('index.html')
-    return HttpResponse(template.render({'pokemons': pokemons}, request))
+    return HttpResponse(template.render({'pokemons': pokemons, "trainers":trainer}, request))
 
 def pokemon(request, id: int):
     pokemon=Pokemon.objects.get(id=id)
