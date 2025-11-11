@@ -2,6 +2,8 @@ from django.http import HttpResponse
 from django.template import loader
 from .models import Pokemon
 from .models import Trainer
+from django.shortcuts import redirect, render
+from pokedex.forms import pokemonform
 
 def index(request):
     pokemons = Pokemon.objects.all()
@@ -29,3 +31,31 @@ def trainer (request, trainer_id):
         "trainer":trainer
     }
     return HttpResponse (template.render(context, request))
+
+def add_pokemon(request):
+    if request.method == "POST":
+        form = pokemonform(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect("pokedex:index")
+    else:
+        form = pokemonform()
+    
+    return render(request, "pokemon_form.html",{"form":form})
+
+def edit_pokemon(request, id: int):
+    pokemon=Pokemon.objects.get(id=id)
+    if request.method == "POST":
+        form = pokemonform(request.POST, request.FILES, instance=pokemon)
+        if form.is_valid():
+            form.save()
+            return redirect("pokedex:index")
+    else:
+        form = pokemonform(instance=pokemon)
+    
+    return render(request, "pokemon_form.html",{"form":form})
+
+def delete_pokemon(request, id: int):
+     pokemon=Pokemon.objects.get(id=id)
+     pokemon.delete()
+     return redirect('pokedex:index')
