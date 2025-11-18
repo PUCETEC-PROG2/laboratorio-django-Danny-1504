@@ -14,14 +14,14 @@
     <h3>Detalles del Entrenador</h3>
 
     <ul class="list-group">
-        <li class="list-group-item"><strong>Nombre:</strong> {{ trainer.nameTrainer }}</li>
+        <li class="list-group-item"><strong>Nombre:</strong> {{ trainer.name_trainer }}</li>
         <li class="list-group-item"><strong>Apellido:</strong> {{ trainer.lastname }}</li>
         <li class="list-group-item"><strong>Nivel:</strong> {{ trainer.level }}</li>
         <li class="list-group-item"><strong>Fecha de nacimiento:</strong> {{ trainer.birthdate }}</li>
     </ul>
 
     <br>
-    <a href="{% url 'trainers' %}" class="btn btn-secondary">Volver a la lista</a>
+    <a href="{% url 'pokedex:trainers' %}" class="btn btn-secondary">Volver a la lista</a>
 </div>
 </body>
 </html>

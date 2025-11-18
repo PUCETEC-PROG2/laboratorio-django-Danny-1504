@@ -37,7 +37,7 @@
                             Nivel: {{ trainer.level }} <br>
                             Fecha de nacimiento: {{ trainer.birthdate }}
                         </p>
-                        <a href="{% url 'trainer' trainer_id=trainer.id %}" class="btn btn-outline-primary btn-sm mt-2">
+                        <a href="{% url 'pokedex:trainer' trainer_id=trainer.id %}" class="btn btn-outline-primary btn-sm mt-2">
                             Ver detalles
                         </a>
                     </div>

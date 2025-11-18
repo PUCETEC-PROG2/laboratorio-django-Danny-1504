@@ -4,31 +4,41 @@
   <div class="container mt-4">
     <p class="p-2">Hola, este es mi primer Pokedex en Django</p>
     <h3 class="mb-4">Pokemons</h3>
-    <a href="{% url 'pokedex:add_pokemon' %}">Añadir pokemon</a>
-    <br>
-    <a href="{% url 'pokedex:trainers' %}">      
-      <h4 class="text-primary">Entrenadores</h4>
-    </a>
-    <br>
+    
+    <!-- Botones mejorados -->
+    <div class="d-flex gap-3 mb-4">
+      <a href="{% url 'pokedex:add_pokemon' %}" class="btn btn-success btn-lg">
+        <i class="fa-solid fa-plus"></i> Añadir Pokémon
+      </a>
+      
+      <a href="{% url 'pokedex:trainers' %}" class="btn btn-info btn-lg">      
+        <i class="fa-solid fa-users"></i> Ver Entrenadores
+      </a>
+    </div>
     
     <div class="row">
       {% for pokemon in pokemons %}
       <div class="col-sm-12 col-md-6 col-lg-4 mb-4">
         <div class="card h-100 shadow-sm">
           {% if pokemon.picture.url %}
-            <img src="{{ pokemon.picture.url }}" class="card-img-top" alt="{{ pokemon.name }}">
+            <img src="{{ pokemon.picture.url }}" class="card-img-top" alt="{{ pokemon.name }}" style="height: 200px; object-fit: cover;">
           {% endif %}
           <div class="card-body text-left">
             <h5 class="card-title">{{ pokemon.name }}</h5>
             <p class="card-text">Altura {{ pokemon.Heigth }}</p>
-            <a href="{% url 'pokedex:pokemon' id=pokemon.id %}" class="btn btn-primary">
-              <i class="fa-solid fa-eye"></i></a>
+            <div class="btn-group" role="group">
+              <a href="{% url 'pokedex:pokemon' id=pokemon.id %}" class="btn btn-outline-primary">
+                <i class="fa-solid fa-eye"></i>
+              </a>
               
-            <a href="{% url 'pokedex:edit_pokemon' id=pokemon.id %}" class="btn btn-primary">
-              <i class="fa-solid fa-pencil"></i></a>
-            
-            <a href="{% url 'pokedex:delete_pokemon' id=pokemon.id %}" class="btn btn-danger">
-              <i class="fa-solid fa-trash"></i></a>
+              <a href="{% url 'pokedex:edit_pokemon' id=pokemon.id %}" class="btn btn-outline-warning">
+                <i class="fa-solid fa-pencil"></i>
+              </a>
+              
+              <a href="{% url 'pokedex:delete_pokemon' id=pokemon.id %}" class="btn btn-outline-danger">
+                <i class="fa-solid fa-trash"></i>
+              </a>
+            </div>
           </div>
         </div>
       </div>

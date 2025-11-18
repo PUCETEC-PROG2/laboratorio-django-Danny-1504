@@ -1,13 +1,48 @@
 {% extends "base.html" %}
 {% block content  %}
- <p>Has elegido el pokemon: <strong>{{ pokemon | capfirst }}</strong></p>
- <h3>Características</h3>
- <ul>
-    <li>Tipo: {{pokemon.type}}</li>
-    <li>Peso: {{pokemon.weigth}}</li>
-    <li>Altura: {{pokemon.Heigth}}</li>
- 
-
-{% endblock content  %}
-
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-4">
+            <!-- Imagen del Pokémon -->
+            {% if pokemon.picture %}
+                <img src="{{ pokemon.picture.url }}" alt="{{ pokemon.name }}" class="img-fluid rounded shadow">
+            {% else %}
+                <div class="bg-light rounded p-5 text-center">
+                    <p class="text-muted">Sin imagen</p>
+                </div>
+            {% endif %}
+        </div>
+        
+        <div class="col-md-8">
+            <h1 class="text-primary">{{ pokemon.name | capfirst }}</h1>
+            <p class="lead">Has elegido el pokemon: <strong>{{ pokemon.name | capfirst }}</strong></p>
             
+            <h3>Características</h3>
+            <ul class="list-group mb-4">
+                <li class="list-group-item"><strong>Tipo:</strong> {{ pokemon.type }}</li>
+                <li class="list-group-item"><strong>Peso:</strong> {{ pokemon.weigth }}</li>
+                <li class="list-group-item"><strong>Altura:</strong> {{ pokemon.Heigth }}</li>
+                {% if pokemon.description %}
+                <li class="list-group-item"><strong>Descripción:</strong> {{ pokemon.description }}</li>
+                {% endif %}
+                {% if pokemon.level %}
+                <li class="list-group-item"><strong>Nivel:</strong> {{ pokemon.level }}</li>
+                {% endif %}
+            </ul>
+
+            <!-- Botones de acción -->
+            <div class="mt-3">
+                <a href="{% url 'pokedex:edit_pokemon' id=pokemon.id %}" class="btn btn-warning">
+                    <i class="fa-solid fa-pencil"></i> Editar
+                </a>
+                <a href="{% url 'pokedex:delete_pokemon' id=pokemon.id %}" class="btn btn-danger">
+                    <i class="fa-solid fa-trash"></i> Eliminar
+                </a>
+                <a href="{% url 'pokedex:index' %}" class="btn btn-secondary">
+                    <i class="fa-solid fa-arrow-left"></i> Volver a la lista
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content  %}
