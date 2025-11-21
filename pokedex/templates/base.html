@@ -6,12 +6,76 @@
         <link href="{% static "bootstrap.min.css" %}" rel="stylesheet" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+        <style>
+            .auth-btn {
+                border-radius: 25px;
+                padding: 10px 20px;
+                font-weight: 600;
+                transition: all 0.3s ease;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                border: none;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                text-decoration: none;
+            }
+            
+            .login-btn {
+                background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+                color: white;
+            }
+            
+            .login-btn:hover {
+                background: linear-gradient(135deg, #3a8fd8 0%, #00c8d6 100%);
+                transform: translateY(-2px);
+                box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+                color: white;
+            }
+            
+            .logout-btn {
+                background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
+                color: white;
+            }
+            
+            .logout-btn:hover {
+                background: linear-gradient(135deg, #e88a8e 0%, #e8c0b4 100%);
+                transform: translateY(-2px);
+                box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+                color: white;
+            }
+            
+            .auth-container {
+                display: flex;
+                justify-content: flex-end;
+                margin: 15px 0;
+            }
+            
+            .btn-icon {
+                margin-right: 8px;
+                font-size: 1.1em;
+            }
+        </style>
     </head>
     <body>
         <div class="container">
             <div class="bg-primary text-white p-4 text-center">
                 <img src='{% static "Pokedex.png" %}' alt='' class='img-fluid'> 
             </div>
+            
+            <div class="auth-container">
+                {% if user.is_authenticated %}
+                    <a href="{% url "logout" %}" class="auth-btn logout-btn">
+                        <i class="fas fa-sign-out-alt btn-icon"></i>
+                        Cerrar Sesión
+                    </a>
+                {% else %}
+                    <a href="{% url "pokedex:login" %}" class="auth-btn login-btn">
+                        <i class="fas fa-sign-in-alt btn-icon"></i>
+                        Iniciar Sesión
+                    </a>
+                {% endif %}
+            </div>
+            
             {% block content  %}{% endblock content  %}
         </div>
     </body>
