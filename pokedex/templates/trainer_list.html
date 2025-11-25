@@ -3,27 +3,253 @@
 <head>
     <meta charset="UTF-8">
     <title>Lista de Entrenadores</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" 
-          rel="stylesheet" 
-          crossorigin="anonymous">
+    <meta name='viewport' content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     {% load static %}
+    <style>
+        .navbar-custom {
+            background: linear-gradient(135deg, #e53935 0%, #e35d5b 100%);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .navbar-brand-custom {
+            font-weight: 700;
+            font-size: 1.8rem;
+            color: #ffde00 !important;
+            text-shadow: 2px 2px 0 #3b4cca, -1px -1px 0 #3b4cca, 1px -1px 0 #3b4cca, -1px 1px 0 #3b4cca;
+            letter-spacing: 1px;
+        }
+        
+        .nav-link-custom {
+            color: white !important;
+            font-weight: 600;
+            border-radius: 20px;
+            margin: 0 5px;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 8px 16px !important;
+        }
+        
+        .nav-link-custom:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+        
+        .nav-link-custom.active {
+            background-color: #ffde00;
+            color: #3b4cca !important;
+            font-weight: 700;
+        }
+        
+        .nav-icon {
+            margin-right: 6px;
+            font-size: 1.1em;
+        }
+        
+        .auth-btn {
+            border-radius: 25px;
+            padding: 10px 20px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+        }
+        
+        .login-btn {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+        }
+        
+        .login-btn:hover {
+            background: linear-gradient(135deg, #3a8fd8 0%, #00c8d6 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+            color: white;
+        }
+        
+        .logout-btn {
+            background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
+            color: white;
+        }
+        
+        .logout-btn:hover {
+            background: linear-gradient(135deg, #e88a8e 0%, #e8c0b4 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+            color: white;
+        }
+        
+        .btn-icon {
+            margin-right: 8px;
+            font-size: 1.1em;
+        }
+        
+        .navbar-toggler {
+            border: 2px solid #ffde00;
+        }
+        
+        .navbar-toggler-icon {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 222, 0, 1%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+        }
+
+        .btn-pokemon {
+            background: linear-gradient(135deg, #ffde00 0%, #ffeb3b 100%);
+            color: #3b4cca !important;
+            border: 3px solid #3b4cca;
+            border-radius: 25px;
+            padding: 12px 25px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-pokemon:hover {
+            background: linear-gradient(135deg, #ffeb3b 0%, #fff176 100%);
+            color: #2c3aa3 !important;
+            border-color: #2c3aa3;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .btn-pokemon:active {
+            transform: translateY(-1px);
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        .btn-pokemon:hover .btn-icon {
+            transform: translateX(-3px);
+        }
+        
+        /* Efecto de brillo adicional */
+        .btn-pokemon::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s ease;
+        }
+        
+        .btn-pokemon:hover::before {
+            left: 100%;
+        }
+
+        /* Estilos para las tarjetas de entrenadores */
+        .card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: none;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15) !important;
+        }
+        
+        .card-img-top {
+            height: 200px;
+            object-fit: cover;
+        }
+
+        /* Botones de acción en tarjetas */
+        .btn-action-group {
+            display: flex;
+            gap: 5px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .btn-action {
+            border-radius: 15px;
+            padding: 6px 12px;
+            font-size: 0.85rem;
+            transition: all 0.3s ease;
+        }
+    </style>
 </head>
 <body>
-    <div class="container">
-        <div class="bg-primary text-white p-4 text-center mb-4">
-            <h1>Mi Pokedex</h1>
+    <div class="container">        
+        <nav class="navbar navbar-expand-lg navbar-custom mb-4">
+            <div class="container-fluid">
+                <a class="navbar-brand navbar-brand-custom" href="{% url 'pokedex:index' %}">
+                    <i class="fas fa-dragon nav-icon"></i>Pokedex
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav me-auto">
+                        <li class="nav-item">
+                            <a class="nav-link nav-link-custom {% if request.resolver_match.url_name == 'index' %}active{% endif %}" 
+                               href="{% url 'pokedex:index' %}">
+                                <i class="fas fa-home nav-icon"></i>Inicio
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link nav-link-custom {% if request.resolver_match.url_name == 'pokemon' or request.resolver_match.url_name == 'add_pokemon' or request.resolver_match.url_name == 'edit_pokemon' %}active{% endif %}" 
+                               href="{% url 'pokedex:index' %}">
+                                <i class="fas fa-dragon nav-icon"></i>Pokémons
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link nav-link-custom active" 
+                               href="{% url 'pokedex:trainers' %}">
+                                <i class="fas fa-user nav-icon"></i>Entrenadores
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="d-flex">
+                        {% if user.is_authenticated %}
+                            <a href="{% url 'logout' %}" class="auth-btn logout-btn">
+                                <i class="fas fa-sign-out-alt btn-icon"></i>
+                                Cerrar Sesión
+                            </a>
+                        {% else %}
+                            <a href="{% url 'pokedex:login' %}" class="auth-btn login-btn">
+                                <i class="fas fa-sign-in-alt btn-icon"></i>
+                                Iniciar Sesión
+                            </a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <div class="bg-primary text-white p-4 text-center mb-4 rounded">
+            <h1><i class="fas fa-users me-3"></i>Lista de Entrenadores</h1>
+            <p class="mb-0">Descubre a todos los entrenadores Pokémon registrados</p>
         </div>
 
-        <h3 class="mb-3">Entrenadores</h3>
+        <!-- Botón de acción principal -->
+        <div class="d-flex justify-content-start mb-4">
+            <a href="{% url 'pokedex:add_trainer' %}" class="btn btn-warning btn-lg">
+                <i class="fa-solid fa-user-plus"></i> Añadir Entrenador
+            </a>
+        </div>
 
         <div class="row g-3">
             {% for trainer in trainers %}
             <div class="col-md-4">
                 <div class="card h-100 shadow-sm">
-
-                    
                     {% if trainer.picture %}
-                        <img src="{{ trainer.picture.url }}" class="card-img-top" alt="{{ trainer.name_trainer }}">                    
+                        <img src="{{ trainer.picture.url }}" class="card-img-top" alt="{{ trainer.name_trainer }}">
+                    {% else %}
+                        <div class="card-img-top bg-light d-flex align-items-center justify-content-center" style="height: 200px;">
+                            <i class="fas fa-user fa-3x text-muted"></i>
+                        </div>
                     {% endif %}
 
                     <div class="card-body text-center">
@@ -31,21 +257,46 @@
                             {{ trainer.name_trainer|capfirst }} {{ trainer.lastname|capfirst }}
                         </h5>
                         <h6 class="card-subtitle mb-2 text-muted">
-                            Entrenador Pokémon
+                            <i class="fas fa-medal me-1"></i>Nivel {{ trainer.level }}
                         </h6>
                         <p class="card-text">
-                            Nivel: {{ trainer.level }} <br>
-                            Fecha de nacimiento: {{ trainer.birthdate }}
+                            <strong><i class="fas fa-birthday-cake me-1"></i></strong> {{ trainer.birthdate }}
                         </p>
-                        <a href="{% url 'pokedex:trainer' trainer_id=trainer.id %}" class="btn btn-outline-primary btn-sm mt-2">
-                            Ver detalles
-                        </a>
+                        
+                        <!-- Botones de acción para cada entrenador -->
+                        <div class="btn-action-group">
+                            <a href="{% url 'pokedex:trainer' trainer_id=trainer.id %}" class="btn btn-outline-primary btn-action">
+                                <i class="fas fa-eye"></i> Ver
+                            </a>
+                            
+                            <!-- Botón para editar -->
+                            <a href="{% url 'pokedex:edit_trainer' trainer_id=trainer.id %}" class="btn btn-outline-warning btn-action">
+                                <i class="fas fa-edit"></i> Editar
+                            </a>
+                            
+                            <!-- Botón para eliminar -->
+                            <a href="{% url 'pokedex:delete_trainer' trainer_id=trainer.id %}" class="btn btn-outline-danger btn-action">
+                                <i class="fas fa-trash"></i> Eliminar
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
             {% empty %}
-            <p class="text-muted">No hay entrenadores aún.</p>
+            <div class="col-12">
+                <div class="alert alert-info text-center">
+                    <i class="fas fa-info-circle me-2"></i>No hay entrenadores registrados aún.
+                </div>
+            </div>
             {% endfor %}
+        </div>
+        
+        <br>
+        <div class="text-center mt-4">
+            <a href="{% url 'pokedex:index' %}" class="btn btn-pokemon">
+                <i class="fas fa-arrow-left btn-icon"></i>
+                Volver a Pokedex
+            </a>
         </div>
     </div>
 </body>

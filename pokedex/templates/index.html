@@ -5,16 +5,17 @@
     <p class="p-2">Hola, este es mi primer Pokedex en Django</p>
     <h3 class="mb-4">Pokemons</h3>
     {% if user.is_authenticated %}  
-      <div class="d-flex gap-3 mb-4">
-        <a href="{% url 'pokedex:add_pokemon' %}" class="btn btn-success btn-lg">
-         <i class="fa-solid fa-plus"></i> Añadir Pokémon
-        </a>
+      <div class="d-flex justify-content-between mb-4">
+    <a href="{% url 'pokedex:add_pokemon' %}" class="btn btn-success btn-lg">
+        <i class="fa-solid fa-plus"></i> Añadir Pokémon
+    </a>
     
-      <a href="{% url 'pokedex:trainers' %}" class="btn btn-info btn-lg">      
+    <a href="{% url 'pokedex:trainers' %}" class="btn btn-info btn-lg">      
         <i class="fa-solid fa-users"></i> Ver Entrenadores
-      </a>
-    {% endif %}  
-    </div>
+    </a>
+</div>
+    {% endif %}
+    
     
     <div class="row">
       {% for pokemon in pokemons %}
