@@ -3,7 +3,7 @@
 <div class="container mt-4">
     <div class="row">
         <div class="col-md-4">
-            <!-- Imagen del Pokémon -->
+            
             {% if pokemon.picture %}
                 <img src="{{ pokemon.picture.url }}" alt="{{ pokemon.name }}" class="img-fluid rounded shadow">
             {% else %}
@@ -30,7 +30,7 @@
                 {% endif %}
             </ul>
 
-            <!-- Botones de acción -->
+            
             <div class="mt-3">
                 <a href="{% url 'pokedex:edit_pokemon' id=pokemon.id %}" class="btn btn-warning">
                     <i class="fa-solid fa-pencil"></i> Editar
