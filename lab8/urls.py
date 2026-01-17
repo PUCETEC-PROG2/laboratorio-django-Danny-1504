@@ -19,6 +19,7 @@ from django.urls import path, include
 from django.conf.urls.static import static
 from oauth2_provider import urls as oauth2_urls
 from django.conf import settings
+from pokedex.views import TrainerListAPI
 
 urlpatterns = [
     path('', include('pokedex.urls')),
@@ -26,6 +27,7 @@ urlpatterns = [
     path('accounts/', include('django.contrib.auth.urls')),
     path('api/', include('api.urls')),
     path('o/', include(oauth2_urls)),
+    path("api/trainers/", TrainerListAPI.as_view(), name="api_trainers"),
 ]
 
 

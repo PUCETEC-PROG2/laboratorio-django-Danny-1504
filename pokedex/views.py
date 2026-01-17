@@ -7,6 +7,10 @@ from pokedex.forms import pokemonform
 from .forms import TrainerForm
 from django.contrib.auth.views import LoginView
 from django.contrib.auth.decorators import login_required
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from pokedex.models import Trainer
+from api.serializers import TrainerSerializer
 
 def index(request):
     pokemons = Pokemon.objects.all()
@@ -98,7 +102,13 @@ def delete_trainer(request, trainer_id: int):
     trainer = Trainer.objects.get(id=trainer_id)
     trainer.delete()
     return redirect('pokedex:trainers')
- 
+
  
 class CustomLoginView(LoginView):
     template_name = 'login_form.html'
+
+class TrainerListAPI(APIView):
+    def get(self, request):
+        trainers = Trainer.objects.all()
+        serializer = TrainerSerializer(trainers, many=True)
+        return Response(serializer.data)

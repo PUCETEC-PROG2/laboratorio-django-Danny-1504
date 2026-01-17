@@ -142,6 +142,13 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CORS_ALLOW_ALL_ORIGINS = True
 
 OAUTH2_PROVIDER = {
+    'ACCESS_TOKEN_EXPIRE_SECONDS': 36000,
+    'AUTHORIZATION_CODE_EXPIRE_SECONDS': 600,
+    'REFRESH_TOKEN_EXPIRE_SECONDS': 86400,
+    'SCOPES': {
+        'read': 'Read scope',
+        'write': 'Write scope',
+    },
 }
 
 AUTHENTICATION_BACKENDS = (
